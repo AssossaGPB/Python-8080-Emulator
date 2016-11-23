@@ -4,12 +4,12 @@
 
 opcodes = {
     0x00: "NOP",
-    0x01: "LXI B #$!!",
+    0x01: "LXI B",
     0x02: "STAX B",
     0x03: "INX B",
     0x04: "INR B",
     0x05: "DCR B",
-    0x06: "MVI B #$!",
+    0x06: "MVI B",
     0x07: "RLC",
     0x08: "NOP",
     0x09: "DAD B",
@@ -17,15 +17,15 @@ opcodes = {
     0x0B: "DCX B",
     0x0C: "INR C",
     0x0D: "DCR C",
-    0x0E: "MVI C #$!",
+    0x0E: "MVI C",
     0x0F: "RRC",
     0x10: "NOP",
-    0x11: "LXI D #$!",
+    0x11: "LXI D",
     0x12: "STAX D",
     0x13: "INX D",
     0x14: "INR D",
     0x15: "DCR D",
-    0x16: "MVI D #$!",
+    0x16: "MVI D",
     0x17: "RAL",
     0x18: "NOP",
     0x19: "DAD D",
@@ -33,39 +33,39 @@ opcodes = {
     0x1B: "DCX D",
     0x1C: "INR E",
     0x1D: "DCR E",
-    0x1E: "MVI E #$!",
+    0x1E: "MVI E",
     0x1F: "RAR",
     0x20: "RIM",
-    0x21: "LXI H #$!!",
-    0x22: "SHLD ($!!)",
+    0x21: "LXI H",
+    0x22: "SHLD",
     0x23: "INX H",
     0x24: "INR H",
     0x25: "DCR H",
-    0x26: "MVI H #$!",
+    0x26: "MVI H",
     0x27: "DAA",
     0x28: "NOP",
     0x29: "DAD H",
-    0x2A: "LHLD ($!!)",
+    0x2A: "LHLD",
     0x2B: "DCX H",
     0x2C: "INR L",
     0x2D: "DCR L",
-    0x2E: "MVI L #$!",
+    0x2E: "MVI L",
     0x2F: "CMA",
     0x30: "SIM",
-    0x31: "LXI SP #$!!",
-    0x32: "STA ($!!)",
+    0x31: "LXI SP",
+    0x32: "STA",
     0x33: "INX SP",
     0x34: "INR M",
     0x35: "DCR M",
-    0x36: "MVI M #$!",
+    0x36: "MVI M",
     0x37: "STC",
     0x38: "NOP",
     0x39: "DAD SP",
-    0x3A: "LDA ($!)",
+    0x3A: "LDA",
     0x3B: "DCX SP",
     0x3C: "INR A",
     0x3D: "DCR A",
-    0x3E: "MVI A #$!",
+    0x3E: "MVI A",
     0x3F: "CMC",
     0x40: "MOV B B",
     0x41: "MOV B C",
@@ -197,89 +197,141 @@ opcodes = {
     0xBF: "CMP A",
     0xC0: "RNZ",
     0xC1: "POP B",
-    0xC2: "JNZ ($!!)",
-    0xC3: "JMP ($!!)",
-    0xC4: "CNZ ($!!)",
+    0xC2: "JNZ",
+    0xC3: "JMP",
+    0xC4: "CNZ",
     0xC5: "PUSH B",
-    0xC6: "ADI #$!",
+    0xC6: "ADI",
     0xC7: "RST 0",
     0xC8: "RZ",
     0xC9: "RET",
-    0xCA: "JZ ($!!)",
+    0xCA: "JZ",
     0xCB: "NOP",
-    0xCC: "CZ ($!!)",
-    0xCD: "CALL ($!!)",
-    0xCE: "ACI #$!",
+    0xCC: "CZ",
+    0xCD: "CALL",
+    0xCE: "ACI",
     0xCF: "RST 1",
     0xD0: "RNC",
     0xD1: "POP D",
-    0xD2: "JNC ($!!)",
-    0xD3: "OUT #$!",
-    0xD4: "CNC ($!!)",
+    0xD2: "JNC",
+    0xD3: "OUT",
+    0xD4: "CNC",
     0xD5: "PUSH D",
-    0xD6: "SUI #$!",
+    0xD6: "SUI",
     0xD7: "RST 2",
     0xD8: "RC",
     0xD9: "NOP",
-    0xDA: "JC ($!!)",
-    0xDB: "IN #$!",
-    0xDC: "CC ($!!)",
+    0xDA: "JC",
+    0xDB: "IN",
+    0xDC: "CC",
     0xDD: "NOP",
-    0xDE: "SBI #$!",
+    0xDE: "SBI",
     0xDF: "RST 3",
     0xE0: "RPO",
     0xE1: "POP H",
-    0xE2: "JPO ($!!)",
+    0xE2: "JPO",
     0xE3: "XTHL",
-    0xE4: "CPO ($!!)",
+    0xE4: "CPO",
     0xE5: "PUSH H",
-    0xE6: "ANI #$!",
+    0xE6: "ANI",
     0xE7: "RST 4",
     0xE8: "RPE",
     0xE9: "PCHL",
-    0xEA: "JPE ($!!)",
+    0xEA: "JPE",
     0xEB: "XCHG",
-    0xEC: "CPE ($!!)",
+    0xEC: "CPE",
     0xED: "NOP",
-    0xEE: "XRI #$!",
+    0xEE: "XRI",
     0xEF: "RST 5",
     0xF0: "RP",
     0xF1: "POP PSW",
-    0xF2: "JP ($!!)",
+    0xF2: "JP",
     0xF3: "DI",
-    0xF4: "CP ($!!)",
+    0xF4: "CP",
     0xF5: "PUSH PSW",
-    0xF6: "ORI #$!",
+    0xF6: "ORI",
     0xF7: "RST 6",
     0xF8: "RM",
     0xF9: "SPHL",
-    0xFA: "JM ($!!)",
+    0xFA: "JM",
     0xFB: "EI",
-    0xFC: "CM ($!!)",
+    0xFC: "CM",
     0xFD: "NOP",
-    0xFE: "CPI #$!",
+    0xFE: "CPI",
     0xFF: "RST 7",
 }
 
+nextReg = {
+    "A": "B",
+    "B": "C",
+    "C": "D",
+    "D": "E",
+    "H": "L",
+}
+
+def util_parity(n):
+    return "{0:b}".format(n).count("1") % 2 == 1
+
 def op_UNDEFINED(state, args):
-    print "Error: Unimplemented Instruction"
+    print "Error: Unimplemented Instruction - %s" % args[0]
     return state
 
 def op_NOP(state, args):
+    return state
+
+def op_LXI(state, args):
+    reg = args[0]
+    if reg == "SP":
+        state.registers["sp"] = (state.memory[state.registers["pc"] + 2] << 8) | state.memory[state.registers["pc"] + 1]
+    else:
+        state.registers[reg] = state.memory[state.registers["pc"] + 2]
+        state.registers[nextReg[reg]] = state.memory[state.registers["pc"] + 1]
+    state.registers["pc"] += 2
+    return state
+
+def op_MOV(state, args):
+    state.registers[args[0]] = state.registers[args[1]]
+    return state
+
+def op_ADD(state, args):
+    n = 0
+    if args[0] == "M":
+        offset = (state.registers["H"] << 8) | state.registers["L"]
+        n = state.registers["A"] + state.memory[offset]
+    else:
+        n = state.registers["A"] + state.registers[args[0]]
+    nff = n & 0xFF
+    state.conditionCodes["z"] = nff == 0
+    state.conditionCodes["s"] = (n & 0x80) != 0
+    state.conditionCodes["cy"] = n > 0xFF
+    state.conditionCodes["p"] = util_parity(nff)
+    state.registers["A"] = nff
+    return state
+
+def op_ADI(state, args):
+    n = state.registers["A"] + state.memory[state.registers["pc"] + 1]
+    nff = n & 0xFF
+    state.conditionCodes["z"] = nff == 0
+    state.conditionCodes["s"] = (n & 0x80) != 0
+    state.conditionCodes["cy"] = n > 0xFF
+    state.conditionCodes["p"] = util_parity(nff)
+    state.registers["A"] = nff
+    state.registers["pc"] += 1
     return state
 
 class State8080:
     conditionCodes, registers, int_enable, memory = None, None, None, None
     def __init__(self):
         self.conditionCodes = dict.fromkeys(["z", "s", "p", "cy", "ac"], False)
-        self.registers = dict.fromkeys(["a", "b", "c", "d", "e", "h", "l", "sp", "pc"], 0)
+        self.registers = dict.fromkeys(["A", "B", "C", "D", "E", "H", "L", "sp", "pc"], 0)
         self.int_enable = 0
         self.memory = bytearray(0xFFFF)
 
 def processByte(state):
     op = opcodes[state.memory[state.registers["pc"]]].split()
-    if "op_" + op[0] in locals():
-        locals()["op_" + op[0]](state, op[1:])
+    opFunc = "op_%s" % op[0]
+    if opFunc in globals():
+        globals()[opFunc](state, op[1:])
     else:
         op_UNDEFINED(state, op)
     state.registers["pc"] += 1

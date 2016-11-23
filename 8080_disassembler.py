@@ -20,7 +20,7 @@ opcodes = {
     0x0E: "MVI C #$!",
     0x0F: "RRC",
     0x10: "NOP",
-    0x11: "LXI D #$!",
+    0x11: "LXI D #$!!",
     0x12: "STAX D",
     0x13: "INX D",
     0x14: "INR D",
