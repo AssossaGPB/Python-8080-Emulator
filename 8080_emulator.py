@@ -1,5 +1,5 @@
 # Provided under the MIT license
-# 8080 Disassembler
+# 8080 Emulator
 # By Assossa
 
 opcodes = {
@@ -261,21 +261,37 @@ opcodes = {
     0xFF: "RST 7",
 }
 
-def processByte(program_bytes, offset):
-    opcode = opcodes[program_bytes[offset]]
-    ob = opcode.count("!") + 1
-    byte1 = program_bytes[offset]
-    byte2 = (program_bytes[offset + 1] if ob > 1 else 0x00) if offset + 1 < len(program_bytes) else 0x00
-    byte3 = (program_bytes[offset + 2] if ob > 2 else 0x00) if offset + 2 < len(program_bytes) else 0x00
-    print "%04x - %02x %02x %02x - %s" % (offset, byte1, byte2, byte3, opcode.replace("!", "%02x" % (byte3 if ob == 3 else byte2), 1).replace("!", "%02x" % byte2, 1))
-    return ob
+def op_UNDEFINED(state, args):
+    print "Error: Unimplemented Instruction"
+    return state
+
+def op_NOP(state, args):
+    return state
+
+class State8080:
+    conditionCodes, registers, int_enable, memory = None, None, None, None
+    def __init__(self):
+        self.conditionCodes = dict.fromkeys(["z", "s", "p", "cy", "ac"], False)
+        self.registers = dict.fromkeys(["a", "b", "c", "d", "e", "h", "l", "sp", "pc"], 0)
+        self.int_enable = 0
+        self.memory = bytearray(0xFFFF)
+
+def processByte(state):
+    op = opcodes[state.memory[state.registers["pc"]]].split()
+    if "op_" + op[0] in locals():
+        locals()["op_" + op[0]](state, op[1:])
+    else:
+        op_UNDEFINED(state, op)
+    state.registers["pc"] += 1
+    return state
 
 def main():
     program_bytes = None
     with open("file.rom", "rb") as file:
         program_bytes = bytearray(file.read())
-    pc = 0
-    while pc < len(program_bytes):
-        pc += processByte(program_bytes, pc)
+    state = State8080()
+    state.memory[:len(program_bytes)] = program_bytes
+    while state.registers["pc"] < len(state.memory):
+        state = processByte(state)
 
 main()
